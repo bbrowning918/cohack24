@@ -5,9 +5,11 @@ import { Card } from "@/components/ui/card"
 
 const HomeCard = ({stepNum, stepText, description, imgSrc}: {stepNum: number, stepText: string, description: string, imgSrc: string}) => {
   return (
-    <Card className="w-96 p-10">
-      <span className="font-semibold rounded p-1 mr-2 bg-jewelPrimary">{stepNum}</span><span className="font-semibold rounded p-1 bg-jewelPrimary">{stepText}</span>
-      <div>{description}</div>
+    <Card className="max-w-md p-10 flex">
+      <div className="pr-8">
+        <span className="font-semibold rounded p-1 mr-2 bg-jewelPrimary">{stepNum}</span><span className="font-semibold rounded p-1 bg-jewelPrimary">{stepText}</span>
+        <div>{description}</div>
+      </div>
       <Image
         src={imgSrc}
         alt="alt :)"
@@ -54,8 +56,8 @@ export default function Home() {
         />
 
         <div className="bg-jewelBlack text-jewelWhite pb-20">
-          <div className="text-2xl text-center font-bold pb-8">How it Works</div>
-          <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-8 pb-20">
+          <div className="text-3xl text-center font-bold pb-16">How it Works</div>
+          <div className="max-w-5xl mx-auto flex flex-wrap justify-center gap-8 pb-20">
             <HomeCard
               stepNum={1}
               stepText={'Sign Up'}
