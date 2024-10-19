@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`min-h-screen bg-background ${lato.variable} antialiased`}
+        className={`min-h-screen ${lato.variable} antialiased`}
       >
         {children}
         <TailwindIndicator />
