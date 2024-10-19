@@ -7,6 +7,7 @@ import { defaultJewelEditorContent } from "@/components/jewel-editor/default-con
 import { useRouter } from "next/navigation";
 import { completedEntriesDb, jewelLocalDb } from "@/lib/local-db";
 import { useState } from "react";
+import { Loader2 } from "lucide-react"
 
 interface SaveButtonProps {
     date: string;
@@ -17,31 +18,43 @@ export function SaveButton({
     date,
     content,
 }: SaveButtonProps) {
+  const [loading, setLoading] = useState(false);
     const [isDialogOpen, setDialogOpen] = useState(false)
     const router = useRouter()
     const submitEntry = async () => {
-      const body = JSON.stringify({
-        content: content ?? defaultJewelEditorContent, 
-      })
-      const res = await fetch('/api/saveEntry', {
-        method: 'POST',
-        body,
-      })
-      await jewelLocalDb().setItem(date, content)
-      await completedEntriesDb().setItem(date, true)
-      if (res.ok) {
-        return router.refresh()
-      }
+      // const body = JSON.stringify({
+      //   content: content ?? defaultJewelEditorContent,
+      // })
+      // const res = await fetch('/api/saveEntry', {
+      //   method: 'POST',
+      //   body,
+      // })
+      // await jewelLocalDb().setItem(date, content)
+      // await completedEntriesDb().setItem(date, true)
+      // if (res.ok) {
+      //   return router.refresh()
+      // }
+
+      sendFeedback().then(() => {
+        setLoading(false);
+        router.push('/journal');
+      });
     }
 
   async function sendFeedback() {
-    await fetch("/api/sendFeedbackEmail", {
-      method: "POST",
-      body: JSON.stringify({ firstName: "John Doe", email: "ajiboyeayotomy@gmail.com" }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+      try {
+        setLoading(true);
+        await fetch("/api/sendFeedbackEmail", {
+          method: "POST",
+          body: JSON.stringify({ firstName: "John Doe", email: "ajiboyeayotomy@gmail.com" }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+      } catch (error) {
+        console.error(error)
+      }
+
 
   }
 
@@ -61,7 +74,8 @@ export function SaveButton({
             sendFeedback();
           }}>
             Submit
-          </Button>
+            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+              </Button>
           <Button variant={'link'} type="button" className="text-primary-foreground underline" onClick={() => setDialogOpen(false)}>
             Keep Writing
           </Button>
