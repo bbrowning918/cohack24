@@ -25,7 +25,7 @@ export default function RootLayout({
         className={`min-h-screen ${lato.variable} antialiased`}
       >
         {children}
-        <TailwindIndicator />
+        {/* <TailwindIndicator /> */}
       </body>
     </html>
   );

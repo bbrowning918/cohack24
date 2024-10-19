@@ -26,14 +26,14 @@ function useJournalEntry(date: string) {
         }
         async function checkCompleted(date: string) {
             const isCompleted = !!(await completedEntriesDb().getItem(date))
-            return !isCompleted
+            return isCompleted
         }
         async function init(date: string) {
             const initialContent = await getInitialContent(date)
             const isCompleted = await checkCompleted(date)
             setContent(initialContent)
-            setCompleted(isCompleted)
             setState('success')
+            setCompleted(isCompleted)
         }
         init(date)
     }, [date])
@@ -56,10 +56,10 @@ export function Journal({ date }: JournalProps) {
     const handleEditorUpdate = ({ editor }: EditorEvents['update']) => debouncedUpdates(editor)
     return (
         <>
-            <JournalHeader date={date} content={content} />
+            <JournalHeader date={date} content={content} isCompleted={isCompleted} />
             {state === 'loading' ? null : (
                 <JewelEditor
-                    editable={!isCompleted}
+                    editable={isCompleted === false}
                     initialContent={content}
                     onUpdate={handleEditorUpdate}
                 />
