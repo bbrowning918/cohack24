@@ -3,7 +3,7 @@ import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { formatToday } from "@/lib/dates";
 
-export default function EditorPage() {
+export default function JournalPage() {
   const journalEntry = {
     date: new Date(),
   };
