@@ -20,9 +20,15 @@ export default async function handler(req, res) {
       const response = await openai.chat.completions.create({
         model: 'gpt-4o',  // You can choose a different model if needed
         messages: [
-          {role: 'user', content: prompt}
+          {
+            role: 'user', content: prompt,
+          },
+          {
+            role: "system",
+            content: "You are an AI assistant summarizing a user's journal entries. The user has chosen to receive a [weekly/bi-weekly/monthly] summary of their progress. Based on their goal and the journal entries provided below, create a summary that includes key accomplishments, areas for improvement, and actionable advice."
+
+          }
         ],
-        max_tokens: 100,  // Customize the response length based on your use case
       });
 
       // Respond with the completion result
