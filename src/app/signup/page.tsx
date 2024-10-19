@@ -14,7 +14,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 
-const StepImage = ({ step }) => {
+const StepImage = ({ step } : {step: number}) => {
     const svgContent = {
         1: (
             <svg width="100%" height="100%" viewBox="0 0 720 1024" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +39,7 @@ const StepImage = ({ step }) => {
 
     return (
         <div className="w-full h-full">
-            {svgContent[step]}
+            {svgContent[1]}
         </div>
     );
 };
@@ -56,7 +56,7 @@ export default function FullPageForm() {
         emailFrequency: ''
     });
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: any) => {
         const {name, value} = e.target;
         setFormData(prev => ({...prev, [name]: value}));
     };
@@ -64,7 +64,7 @@ export default function FullPageForm() {
     const handleNext = () => setStep(prev => Math.min(prev + 1, 4));
     const handlePrev = () => setStep(prev => Math.max(prev - 1, 1));
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: any) => {
         e.preventDefault();
         console.log('Form submitted:', formData);
     };
