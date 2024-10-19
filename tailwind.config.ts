@@ -12,7 +12,7 @@ const config: Config = {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        jewelBlack: "var(--black)",
+        jewelBlack: "hsl(234, 17%, 12%)",
         jewelWhite: "var(--white)",
         jewelPrimary: "hsl(var(--primary))",
         jewelSecondary: "hsl(var(--secondary))",
