@@ -6,7 +6,7 @@ export const defaultJewelEditorExtensions = [
     emptyEditorClass:
       "before:content-[attr(data-placeholder)] before:float-left before:text-[#adb5bd] before:h-0 before:pointer-events-none",
 
-    placeholder: `What’s on your mind today?\n\nIf you not sure where to start, use “/” to choose from a list of prompts`,
+    placeholder: `What’s on your mind today?\nIf you not sure where to start, use “/” to choose from a list of prompts`,
   }),
   StarterKit.configure(),
   slashCommand,
