@@ -148,15 +148,15 @@ export default function FullPageForm() {
                             <RadioGroup defaultValue="comfortable" onValueChange={(value) => setFormData(prev => ({ ...prev, goal: value }))}>
                                 <div className="space-y-2">
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="productivity" id="r1" />
+                                        <RadioGroupItem value="productivity" id="r1" className="border-jewelBlack"/>
                                         <Label htmlFor="r1">Improve my daily productivity</Label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="workProgress" id="r2" />
+                                        <RadioGroupItem value="workProgress" id="r2" className="border-jewelBlack"/>
                                         <Label htmlFor="r2">Monitor my work progress & identify areas of improvement</Label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="mindfulness" id="r3" />
+                                        <RadioGroupItem value="mindfulness" id="r3" className="border-jewelBlack"/>
                                         <Label htmlFor="r3">Cultivate mindfulness and improve interpersonal interactions</Label>
                                     </div>
                                 </div>
@@ -167,15 +167,15 @@ export default function FullPageForm() {
                             <RadioGroup defaultValue="comfortable" onValueChange={(value) => setFormData(prev => ({ ...prev, emailFrequency: value }))}>
                                 <div className="space-y-2">
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="weekly" id="r1" />
+                                        <RadioGroupItem value="weekly" id="r1" className="border-jewelBlack"/>
                                         <Label htmlFor="r1">Weekly</Label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="biweekly" id="r2" />
+                                        <RadioGroupItem value="biweekly" id="r2" className="border-jewelBlack"/>
                                         <Label htmlFor="r2">Bi-weekly</Label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="monthly" id="r3" />
+                                        <RadioGroupItem value="monthly" id="r3" className="border-jewelBlack"/>
                                         <Label htmlFor="r3">Monthly</Label>
                                     </div>
                                 </div>
@@ -183,16 +183,16 @@ export default function FullPageForm() {
                         )}
                         <div className="flex justify-between">
                             {step > 1 && (
-                                <Button type="button" onClick={handlePrev} variant="outline" className="border-gray-300 text-black hover:bg-gray-100">
+                                <Button type="button" onClick={handlePrev} variant="outline" className="p-4 text-jewelBlack">
                                     Previous
                                 </Button>
                             )}
                             {step < 4 ? (
-                                <Button type="button" onClick={handleNext} className="bg-lime-500 text-white hover:bg-lime-600">
+                                <Button type="button" onClick={handleNext} className="p-4 text-jewelBlack">
                                     Continue
                                 </Button>
                             ) : (
-                                <Button type="submit" className="bg-lime-500 text-white hover:bg-lime-600" onClick={async () => {
+                                <Button type="submit" className="p-4 text-jewelBlack" onClick={async () => {
                                     console.log(formData);
                                     await fetch("/api/signup", {
                                         method: "POST",
@@ -215,7 +215,7 @@ export default function FullPageForm() {
             <footer className="p-4 absolute bottom-0 left-0 right-0">
                 <div className="w-full bg-gray-200 h-2">
                     <div
-                        className="bg-lime-500 h-2 transition-all duration-300 ease-in-out"
+                        className="bg-jewelPrimary h-2 transition-all duration-300 ease-in-out"
                         style={{ width: `${(step / 4) * 100}%` }}
                     ></div>
                 </div>

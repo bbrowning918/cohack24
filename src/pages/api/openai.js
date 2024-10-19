@@ -66,15 +66,22 @@ const fetchJournalEntries = async (user_id) => {
  * Send email using Nodemailer.
  */
 const sendEmail = async ({ to, subject, text, html }) => {
+  // see messages at https://ethereal.email/login with credentials below
   const transporter = nodemailer.createTransport({
-    host: 'smpt.imitate.email',
+    host: 'smtp.ethereal.email',
     port: 587,
-    secure: true,
     auth: {
-        user: process.env.EMAIL_USER,
-        password: process.env.EMAIL_PASS,
+        user: 'david.ankunding@ethereal.email',
+        pass: 'gvGnCbeHaVkahrrMEZ'
     }
-})
+    // host: 'smpt.imitate.email',
+    // port: 587,
+    // secure: true,
+    // auth: {
+    //     user: process.env.EMAIL_USER,
+    //     password: process.env.EMAIL_PASS,
+    // }
+  })
 
   const mailOptions = {
     from: process.env.EMAIL_USER,

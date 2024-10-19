@@ -1,6 +1,22 @@
 import { Blocks } from "lucide-react";
+import type { EditorInstance } from "novel";
+import type { Range } from '@tiptap/core'
 import { createSuggestionItems } from "novel/extensions";
 import { Command, renderItems } from "novel/extensions";
+
+const insertPreset = (content: string, editor: EditorInstance, range: Range) => {
+  editor
+    .chain()
+    .focus()
+    .deleteRange(range)
+    .setNode("heading", { level: 4 })
+    .insertContent(
+      content
+    )
+    .focus('end')
+    .insertContent({ type: "paragraph" })
+    .run();
+}
 
 export const suggestionItems = createSuggestionItems([
   {
@@ -9,34 +25,14 @@ export const suggestionItems = createSuggestionItems([
     description: "Question Preset",
     searchTerms: ["what", "ai"],
     icon: <Blocks size={18} />,
-    command: ({ editor, range }) => {
-      editor
-        .chain()
-        .focus()
-        .deleteRange(range)
-        .setNode("heading", { level: 4 })
-        .insertContent(
-          "What tasks did you complete today, and what could you improve for tomorrow?\n"
-        )
-        .run();
-    },
+    command: ({ editor, range }) => insertPreset("What tasks did you complete today, and what could you improve for tomorrow?", editor, range),
   },
   {
     title: "Did you encounter any distractions, and how did you manage them?",
     description: "Question Preset",
     searchTerms: ["did", "ai"],
     icon: <Blocks size={18} />,
-    command: ({ editor, range }) => {
-      editor
-        .chain()
-        .focus()
-        .deleteRange(range)
-        .setNode("heading", { level: 4 })
-        .insertContent(
-          "Did you encounter any distractions, and how did you manage them?\n"
-        )
-        .run();
-    },
+    command: ({ editor, range }) => insertPreset("Did you encounter any distractions, and how did you manage them?", editor, range)
   },
   {
     title:
@@ -44,17 +40,7 @@ export const suggestionItems = createSuggestionItems([
     description: "Question Preset",
     searchTerms: ["what", "ai"],
     icon: <Blocks size={18} />,
-    command: ({ editor, range }) => {
-      editor
-        .chain()
-        .focus()
-        .deleteRange(range)
-        .setNode("heading", { level: 4 })
-        .insertContent(
-          "What are three things that went well today, and how can you replicate that success?\n"
-        )
-        .run();
-    },
+    command: ({ editor, range }) => insertPreset("What are three things that went well today, and how can you replicate that success?", editor, range),
   },
 ]);
 

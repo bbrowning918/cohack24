@@ -1,31 +1,12 @@
-import { JewelEditor } from "@/components/jewel-editor/editor";
-import { Logo } from "@/components/logo";
-import { Button } from "@/components/ui/button";
-import { formatToday } from "@/lib/dates";
+import { Journal } from "./journal";
 
 export default function JournalPage() {
   const journalEntry = {
-    date: new Date(),
+    date: "2024-10-19T16:38:23.867Z",
   };
   return (
     <div className="container mx-auto">
-      <header className="flex flex-col gap-16 py-14">
-        <div className="flex flex-wrap w-full items-center">
-          <Logo />
-          <div className="flex-1" />
-          <div>
-            <Button size="lg" type="button">
-              Submit
-            </Button>
-          </div>
-        </div>
-        <div>
-          <h1 className="font-bold text-3xl">
-            {formatToday(journalEntry.date)}
-          </h1>
-        </div>
-      </header>
-      <JewelEditor />
+      <Journal date={journalEntry.date} />
     </div>
   );
 }

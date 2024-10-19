@@ -1,7 +1,6 @@
 "use client";
 
-import { useDebouncedCallback } from "@/lib/use-debounced-callback";
-import type { JSONContent, AnyExtension } from "@tiptap/core";
+import type { JSONContent, AnyExtension, EditorEvents } from "@tiptap/core";
 import {
   EditorCommand,
   EditorCommandEmpty,
@@ -10,8 +9,6 @@ import {
   EditorContent,
   EditorRoot,
 } from "novel";
-import type { EditorInstance } from "novel";
-import { useState } from "react";
 import { defaultJewelEditorContent } from "./default-content";
 import { defaultJewelEditorExtensions } from "./default-extensions";
 import { suggestionItems } from "./commands/slash-command";
@@ -20,20 +17,14 @@ import { handleCommandNavigation } from "novel/extensions";
 interface JewelEditorProps {
   initialContent?: JSONContent;
   extensions?: AnyExtension[];
+  onUpdate: (ctx: EditorEvents['update']) => unknown
 }
 
 export function JewelEditor({
   extensions = [],
   initialContent = defaultJewelEditorContent,
+  onUpdate,
 }: JewelEditorProps) {
-  const [content, setContent] = useState(initialContent);
-  const debouncedUpdates = useDebouncedCallback(
-    async (editor: EditorInstance) => {
-      const json = editor.getJSON();
-      setContent(json);
-    },
-    500
-  );
   return (
     <EditorRoot>
       <EditorContent
@@ -48,8 +39,8 @@ export function JewelEditor({
         }}
         extensions={extensions.concat(defaultJewelEditorExtensions)}
         immediatelyRender={false}
-        initialContent={content}
-        onUpdate={({ editor }) => debouncedUpdates(editor)}
+        initialContent={initialContent}
+        onUpdate={onUpdate}
       >
         <EditorCommand className="z-50 h-auto max-h-[330px] w-[333px] overflow-y-auto rounded-md border border-muted bg-background px-1 py-2 shadow-md transition-all">
           <EditorCommandEmpty className="px-2 text-muted-foreground">
