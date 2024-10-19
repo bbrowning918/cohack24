@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
-import nodemailer from 'nodemailer';
 import { createClient } from '@supabase/supabase-js';
+import { calculateDateRange } from '../../utils/dateUtils';
 
 // Initialize OpenAI
 const openai = new OpenAI({
@@ -62,37 +62,6 @@ const fetchJournalEntries = async (user_id) => {
   return { journalEntries, error };
 };
 
-/**
- * Send email using Nodemailer.
- */
-const sendEmail = async ({ to, subject, text, html }) => {
-  // see messages at https://ethereal.email/login with credentials below
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-        user: 'david.ankunding@ethereal.email',
-        pass: 'gvGnCbeHaVkahrrMEZ'
-    }
-    // host: 'smpt.imitate.email',
-    // port: 587,
-    // secure: true,
-    // auth: {
-    //     user: process.env.EMAIL_USER,
-    //     password: process.env.EMAIL_PASS,
-    // }
-  })
-
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to,
-    subject,
-    text,
-    html,
-  };
-
-  return transporter.sendMail(mailOptions);
-};
 
 /**
  * Main handler function for the API route.
@@ -142,36 +111,30 @@ export default async function handler(req, res) {
     userMessage += `${index + 1}. Entry: ${entry.content}\n\n`;
   });
 
+  const { startDate, endDate } = calculateDateRange(msgFrequency.time_interval)
   // Define the system message
   const systemMessage = `
-    You are an AI assistant tasked with summarizing a user's journal entries for their progress report. 
-    The user has chosen a ${msgFrequency.time_interval} summary format, focusing on the goal: '${goal.heading}'.
-    Generate a structured summary that includes:
+  You are an AI assistant tasked with summarizing a user's journal entries for their progress report. 
+  The user has chosen a ${msgFrequency.time_interval} summary format, focusing on the goal: '${goal.heading}'.
+  Generate a structured summary in JSON format with the following properties:
 
-    1. **Introduction**:
-      - Address the user by their first name (${profile.firstname}).
-      - State the summary period and encourage the user.
+  {
+    "firstName": "${profile.firstname}",
+    "startDate": "${startDate}",
+    "endDate": "${endDate}",
+    "selectedGoal": "Improve My Daily Productivity",
+    "goalImportance": "This goal helps you enhance your efficiency and achieve your daily tasks more effectively.",
+    "tasksCompleted": "[Highlight significant tasks or milestones achieved by the user, emphasizing their impact or challenge level.]",
+    "challengesFaced": "[Provide an overview of notable challenges, both practical and emotional, that affected the user’s progress.]",
+    "timeManagement": "[Reflect on how the user allocated their time, providing insights on effective and ineffective time use.]",
+    "collaboration": "[Offer feedback on the user's interactions with others, support received, and social aspects of their work.]",
+    "suggestions": "[Provide personalized recommendations aligned with the user’s goal, helping them optimize their progress.]",
+    "emotionalWellbeing": "[Include reflections on the user’s emotional state during the period, highlighting moments of uncertainty, confidence, or self-reflection.]",
+    "conclusion": "[Wrap up the insights, reinforcing the progress made and encouraging continued journaling and reflection.]"
+  }
 
-    2. **Goal Overview**:
-      - Mention the user's selected goal and its importance.
-
-    3. **Key Insights**:
-      - **Tasks Completed**: Highlight significant tasks or milestones achieved by the user, emphasizing their impact or challenge level.
-      - **Challenges Faced**: Provide an overview of notable challenges, both practical and emotional, that affected the user’s progress.
-      - **Time Management Patterns**: Reflect on how the user allocated their time, providing insights on effective and ineffective time use.
-      - **Collaboration & Support**: Offer feedback on the user's interactions with others, support received, and social aspects of their work.
-
-    4. **Suggestions for Improvement**:
-      - Provide personalized recommendations aligned with the user’s goal, helping them optimize their progress.
-
-    5. **Emotional Wellbeing**:
-      - Include reflections on the user’s emotional state during the period, highlighting moments of uncertainty, confidence, or self-reflection.
-
-    6. **Conclusion**:
-      - Wrap up the insights, reinforcing the progress made and encouraging continued journaling and reflection.
-
-    Maintain a friendly and supportive tone throughout, focusing on constructive feedback and actionable advice.
-  `;
+  Ensure that the content is filled in according to the provided journal entries and user data. Maintain a friendly and supportive tone throughout, focusing on constructive feedback and actionable advice.
+`;
 
   try {
     // Call the OpenAI API to generate a completion
@@ -183,16 +146,7 @@ export default async function handler(req, res) {
       ],
     });
 
-    // Send email with the AI-generated summary
-    const emailInfo = await sendEmail({
-      to: email,
-      subject: 'Your Progress Report',
-      text: response.choices[0].message.content,
-      html: `<p>${response.choices[0].message.content}</p>`,
-    });
-
-    console.log('Email sent:', emailInfo.messageId);
-
+   
     return res.status(200).json({ result: response.choices[0].message.content });
   } catch (error) {
     console.error('Error with OpenAI API or email:', error);
