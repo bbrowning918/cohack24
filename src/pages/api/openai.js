@@ -66,6 +66,7 @@ const fetchJournalEntries = async (user_id) => {
  * Send email using Nodemailer.
  */
 const sendEmail = async ({ to, subject, text, html }) => {
+  // see messages at https://ethereal.email/login with credentials below
   const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
