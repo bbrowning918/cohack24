@@ -5,17 +5,8 @@
 :root {
   --primary: #c9ff66;
   --secondary: e1e1e1;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary: #c9ff66;
-    --secondary: e1e1e1;
-  }
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
+  --white: #fcfcfc;
+  --black: #2b2b2b;
 }
 
 @layer utilities {
@@ -26,8 +17,8 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --background: 0 0% 99%;
+    --foreground: 0 0% 17%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
@@ -61,8 +52,8 @@ body {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 17%;
+    --foreground: 0 0% 99%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;

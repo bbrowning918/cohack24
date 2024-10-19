@@ -12,6 +12,8 @@ const config: Config = {
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+			jewelBlack: 'var(--black)',
+			jewelWhite: 'var(--white)',
   			jewelPrimary: 'var(--primary)',
   			jewelSecondary: 'var(--secondary)',
   			card: {
