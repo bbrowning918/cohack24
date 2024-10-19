@@ -14,7 +14,8 @@ import type { EditorInstance } from "novel";
 import { useState } from "react";
 import { defaultJewelEditorContent } from "./default-content";
 import { defaultJewelEditorExtensions } from "./default-extensions";
-import { suggestionItems } from "./commands/slash-command";
+import { aiItems, suggestionItems } from "./commands/slash-command";
+import { handleCommandNavigation } from "novel/extensions";
 
 interface JewelEditorProps {
   initialContent?: JSONContent;
@@ -41,13 +42,16 @@ export function JewelEditor({
             class:
               "prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none",
           },
+          handleDOMEvents: {
+            keydown: (_view, event) => handleCommandNavigation(event),
+          },
         }}
         extensions={extensions.concat(defaultJewelEditorExtensions)}
         immediatelyRender={false}
         initialContent={content}
         onUpdate={({ editor }) => debouncedUpdates(editor)}
       >
-        <EditorCommand className="z-50 h-auto max-h-[330px]  w-72 overflow-y-auto rounded-md border border-muted bg-background px-1 py-2 shadow-md transition-all">
+        <EditorCommand className="z-50 h-auto max-h-[330px] w-[333px] overflow-y-auto rounded-md border border-muted bg-background px-1 py-2 shadow-md transition-all">
           <EditorCommandEmpty className="px-2 text-muted-foreground">
             No results
           </EditorCommandEmpty>
@@ -59,7 +63,7 @@ export function JewelEditor({
                 className={`flex w-full items-center space-x-2 rounded-md px-2 py-1 text-left text-sm hover:bg-accent aria-selected:bg-accent `}
                 key={item.title}
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-md border border-muted bg-background">
+                <div className="flex h-10 min-w-10 w-10 items-center justify-center rounded-md border border-muted bg-background">
                   {item.icon}
                 </div>
                 <div>
