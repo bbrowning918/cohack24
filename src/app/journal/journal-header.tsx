@@ -1,9 +1,9 @@
-'use client';
 
 import { Logo } from "@/components/logo";
 import type { JSONContent } from "novel";
 import { formatToday } from "@/lib/dates";
 import { SaveButton } from "./save-button";
+import { Button } from "@/components/ui/button";
 
 interface JournalHeaderProps {
     date: string;
@@ -17,7 +17,8 @@ export function JournalHeader({ content, date }: JournalHeaderProps) {
       <div className="flex flex-wrap w-full items-center">
         <Logo />
         <div className="flex-1" />
-        <div>
+        <div className="flex items-center gap-4">
+          <Button variant='ghost' disabled>Previous Entries</Button>
           <SaveButton content={content} date={date} />
         </div>
       </div>
