@@ -56,7 +56,7 @@ export function Journal({ date }: JournalProps) {
     const handleEditorUpdate = ({ editor }: EditorEvents['update']) => debouncedUpdates(editor)
     return (
         <>
-            <JournalHeader date={date} content={content} />
+            <JournalHeader date={date} content={content} isCompleted={isCompleted} />
             {state === 'loading' ? null : (
                 <JewelEditor
                     editable={isCompleted === false}
