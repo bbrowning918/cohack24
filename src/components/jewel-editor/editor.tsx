@@ -18,12 +18,14 @@ interface JewelEditorProps {
   initialContent?: JSONContent;
   extensions?: AnyExtension[];
   onUpdate: (ctx: EditorEvents['update']) => unknown
+  editable?: boolean
 }
 
 export function JewelEditor({
   extensions = [],
   initialContent = defaultJewelEditorContent,
   onUpdate,
+  editable = true,
 }: JewelEditorProps) {
   return (
     <EditorRoot>
@@ -37,6 +39,7 @@ export function JewelEditor({
             keydown: (_view, event) => handleCommandNavigation(event),
           },
         }}
+        editable={editable}
         extensions={extensions.concat(defaultJewelEditorExtensions)}
         immediatelyRender={false}
         initialContent={initialContent}
