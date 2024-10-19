@@ -11,6 +11,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'jewelPrimary': "var(--primary)",
+        'jewelSecondary': "var(--secondary)",
       },
     },
   },
