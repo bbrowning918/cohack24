@@ -69,6 +69,7 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        halfEllipse: "50% / 90% 90% 0 0",
       },
       keyframes: {
         "accordion-down": {
