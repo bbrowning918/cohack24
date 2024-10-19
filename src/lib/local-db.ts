@@ -27,10 +27,12 @@ export function jewelLocalDb() {
 
 export function completedEntriesDb() {
     if (!window.db?.completedJournals) {
-        localforage.createInstance({
-            storeName: 'completed_entries'
+        const completedJournalsStore = localforage.createInstance({
+            name: 'Jewel',
+            storeName: 'completed_entries',
+            version: 1.0,
         })
-        window.db = { ...(window.db ?? {}), completedJournals: localforage }
+        window.db = { ...(window.db ?? {}), completedJournals: completedJournalsStore }
     }
     return window.db.completedJournals
 }

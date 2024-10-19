@@ -29,16 +29,12 @@ export function SaveButton({
       //   method: 'POST',
       //   body,
       // })
-      // await jewelLocalDb().setItem(date, content)
-      // await completedEntriesDb().setItem(date, true)
-      // if (res.ok) {
-      //   return router.refresh()
-      // }
 
-      sendFeedback().then(() => {
-        setLoading(false);
-        router.push('/journal');
-      });
+      await jewelLocalDb().setItem(date, content)
+      await completedEntriesDb().setItem(date, true)
+      await sendFeedback();
+
+      router.refresh()
     }
 
   async function sendFeedback() {
@@ -53,9 +49,9 @@ export function SaveButton({
         })
       } catch (error) {
         console.error(error)
+      } finally {
+        setLoading(false)
       }
-
-
   }
 
   return (
