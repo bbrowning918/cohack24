@@ -2,18 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary: #c9ff66;
-  --secondary: e1e1e1;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary: #c9ff66;
-    --secondary: e1e1e1;
-  }
-}
-
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -26,15 +14,15 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --background: 0 0% 99%;
+    --foreground: 0 0% 17%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
+    --primary: 81 100% 70%;
+    --primary-foreground: 0 0% 17%;
+    --secondary: , 0% 88%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
@@ -59,10 +47,12 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --white: #fcfcfc;
+    --black: #2b2b2b;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 17%;
+    --foreground: 0 0% 99%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
