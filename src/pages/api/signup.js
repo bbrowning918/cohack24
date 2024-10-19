@@ -5,14 +5,18 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { firstname, email, occupation, goal, msg_frequency } = req.body;
+    const { firstname, email, occupation, goal, emailFrequency: msg_frequency } = req.body;
+
+
+
 
     // Step 1: Insert a new goal if needed
-    let goal_id = goal;
+    
+    let goal_id = {"productivity": 1, "workProgress": 2, "midndfulness": 3}[goal];
     if (typeof goal === 'string') {
       const { data: goalData, error: goalError } = await supabase
         .from('goals')
-        .insert([{ name: goal }])
+        .insert([{ heading: goal }])
         .select('id')
         .single();
 

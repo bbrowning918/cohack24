@@ -194,7 +194,16 @@ export default function FullPageForm() {
                             ) : (
                                 <Button type="submit" className="bg-lime-500 text-white hover:bg-lime-600" onClick={async () => {
                                     console.log(formData);
+                                    await fetch("/api/signup", {
+                                        method: "POST",
+                                        body: JSON.stringify(formData),
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                        },
+                                    })
+
                                     await router.push('/journal')
+
                                 }}>
                                     Submit
                                 </Button>
