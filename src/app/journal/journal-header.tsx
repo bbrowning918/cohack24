@@ -12,7 +12,6 @@ interface JournalHeaderProps {
 }
 
 export function JournalHeader({ content, date, isCompleted }: JournalHeaderProps) {
-  console.log({ date })
   const todayDate = formatToday(date)
   return (
     <header className="flex flex-col gap-16 pt-14 pb-5 sticky top-0 bg-gradient-to-b from-background from-95% to-transparent z-10">
