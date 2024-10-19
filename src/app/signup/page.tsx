@@ -13,6 +13,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
+import {OrbitProgress} from 'react-loading-indicators'
 
 const StepImage = ({ step } : {step: number}) => {
     const svgContent = {
@@ -56,6 +57,8 @@ export default function FullPageForm() {
         emailFrequency: ''
     });
 
+    const [loading, setLoading] = useState(false);
+
     const handleInputChange = (e: any) => {
         const {name, value} = e.target;
         setFormData(prev => ({...prev, [name]: value}));
@@ -68,6 +71,14 @@ export default function FullPageForm() {
         e.preventDefault();
         console.log('Form submitted:', formData);
     };
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+           <OrbitProgress color="#32cd32" size="medium" text="" textColor="" />           
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-white text-black flex flex-col md:flex-row">
@@ -194,14 +205,18 @@ export default function FullPageForm() {
                             ) : (
                                 <Button type="submit" className="p-4 text-jewelBlack" onClick={async () => {
                                     console.log(formData);
-                                    await fetch("/api/signup", {
+                                    setLoading(true)
+                                    fetch("/api/signup", {
                                         method: "POST",
                                         body: JSON.stringify(formData),
                                         headers: {
                                             "Content-Type": "application/json",
                                         },
+                                    }).then((data) => {
+                                        setLoading(false);
                                     })
 
+                                
                                     await router.push('/journal')
 
                                 }}>
