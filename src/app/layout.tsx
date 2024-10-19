@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { Lato } from 'next/font/google'
+import { Lato } from "next/font/google";
 import "./globals.css";
-
-//dev
+import { TailwindIndicator } from "@/components/tailwind-indicator";
 
 const lato = Lato({
-    weight: ['400', '700'],
-    variable: '--font-lato',
-    subsets: ['latin'],
+  weight: ["400", "700"],
+  variable: "--font-lato",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -21,11 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${lato.variable} antialiased`}
+        className={`min-h-screen bg-background ${lato.variable} antialiased`}
       >
         {children}
+        <TailwindIndicator />
       </body>
     </html>
   );
