@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
 type Props = {
-    firstName: string,
+    firstName?: string,
     startDate?: string
     endDate?: string
     selectedGoal?: string,
@@ -17,11 +17,11 @@ type Props = {
 };
 
 export const Feedback = ({
-    firstName,
-    startDate = 'Oct 12',
-    endDate = 'Oct 19',
-    selectedGoal = 'Improve My Daily Productivity',
-    goalImportance = 'This goal helps you enhance your efficiency and achieve your daily tasks more effectively.',
+    firstName = '[First Name]',
+    startDate = '[Oct 12]',
+    endDate = '[Oct 19]',
+    selectedGoal = '[Improve My Daily Productivity]',
+    goalImportance = '[This goal helps you enhance your efficiency and achieve your daily tasks more effectively.]',
     tasksCompleted = '[A list of top tasks during this period]',
     challengesFaced = '[Overview of notable changes]',
     timeManagement = '[Insights on how time was allocated]',
