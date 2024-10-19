@@ -25,11 +25,8 @@ function useJournalEntry(date: string) {
             return initialContent
         }
         async function checkCompleted(date: string) {
-            const isCompleted = await completedEntriesDb().getItem(date)
-            if (!isCompleted) {
-                return false
-            }
-            return true
+            const isCompleted = !!(await completedEntriesDb().getItem(date))
+            return !isCompleted
         }
         async function init(date: string) {
             const initialContent = await getInitialContent(date)
