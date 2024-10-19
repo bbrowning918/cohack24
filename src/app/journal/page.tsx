@@ -1,16 +1,12 @@
-import { JournalHeader } from "./journal-header";
-import { formatToday } from "@/lib/dates";
-import { JournalEditor } from "./journal-editor";
+import { Journal } from "./journal";
 
 export default function JournalPage() {
   const journalEntry = {
-    date: new Date(),
+    date: "2024-10-19T16:38:23.867Z",
   };
-  const todayDate = formatToday(journalEntry.date)
   return (
     <div className="container mx-auto">
-      <JournalHeader todayDate={todayDate} />
-      <JournalEditor todayDate={todayDate}  />
+      <Journal date={journalEntry.date} />
     </div>
   );
 }
