@@ -14,7 +14,7 @@ import type { EditorInstance } from "novel";
 import { useState } from "react";
 import { defaultJewelEditorContent } from "./default-content";
 import { defaultJewelEditorExtensions } from "./default-extensions";
-import { aiItems, suggestionItems } from "./commands/slash-command";
+import { suggestionItems } from "./commands/slash-command";
 import { handleCommandNavigation } from "novel/extensions";
 
 interface JewelEditorProps {
