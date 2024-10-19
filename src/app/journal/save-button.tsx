@@ -33,7 +33,19 @@ export function SaveButton({
         return router.refresh()
       }
     }
-    return (
+
+  async function sendFeedback() {
+    await fetch("/api/sendFeedbackEmail", {
+      method: "POST",
+      body: JSON.stringify({ firstName: "John Doe", email: "ajiboyeayotomy@gmail.com" }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
+  }
+
+  return (
 
         <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild>
@@ -45,7 +57,9 @@ export function SaveButton({
           <QuestionMark />
           <DialogTitle>Are you sure you're done writing?</DialogTitle>
           <p>If you click submit, you can’t make any changes to your journal entry</p>
-          <Button size="lg" type="button" onClick={submitEntry}>
+          <Button size="lg" type="button" onClick={submitEntry} onSubmit={() => {
+            sendFeedback();
+          }}>
             Submit
           </Button>
           <Button variant={'link'} type="button" className="text-primary-foreground underline" onClick={() => setDialogOpen(false)}>
