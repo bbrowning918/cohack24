@@ -19,17 +19,17 @@ export default function Home() {
             priority
           />
           <nav className="flex gap-4">
-            <Link href="/signup" className="text-jewelBlack">About</Link>
-            <Link href="/signup" className="text-jewelBlack">Suggestions</Link>
-            <Link href="/signup" className="text-jewelBlack">FAQ</Link>
-            <Link href="/signup"><Button className="p-6 bg-jewelPrimary text-jewelBlack">Log In</Button></Link>
+            <Button variant="ghost" className="p-4" asChild><Link href="/signup" className="text-jewelBlack">About</Link></Button>
+            <Button variant="ghost" className="p-4" asChild><Link href="/signup" className="text-jewelBlack">Suggestions</Link></Button>
+            <Button variant="ghost" className="p-4" asChild><Link href="/signup" className="text-jewelBlack">FAQ</Link></Button>
+            <Button asChild className="p-4 text-jewelBlack"><Link href="/signup">Log In</Link></Button>
           </nav>
         </div>
 
         <div className="max-w-3xl mx-auto flex flex-col pb-20">
           <div className="text-6xl text-jewelBlack font-bold text-center mb-6">Unlock the Endless Possibilities of Journaling</div>
           <div className="text-center mb-6">Our journaling tool helps you reflect, grow, and achieve your goals with personalized prompts and AI-driven feedback. Gain valuable insights into your journey of self-improvement.</div>
-          <Link href="/signup" className="mx-auto"><Button className="p-6 bg-jewelPrimary text-jewelBlack">Start Journaling Now</Button></Link>
+          <Link href="/signup" className="mx-auto"><Button className="p-6 text-jewelBlack">Start Journaling Now</Button></Link>
         </div>
 
         <div className="w-screen h-24 bg-jewelBlack rounded-halfEllipse border-jewelPrimary"></div>
@@ -73,7 +73,7 @@ export default function Home() {
             <div className="pb-4">Our AI-powered journal helps you mine those gems, turning everyday tasks into valuable insights, so you
               can see how far you&#39;ve come and where you need to go.
             </div>
-            <Link href="/signup"><Button className="p-6 bg-jewelPrimary text-jewelBlack">Start Journaling Now</Button></Link>
+            <Button asChild className="p-6 text-jewelBlack"><Link href="/signup">Start Journaling Now</Link></Button>
           </div>
         </div>
       </main>
