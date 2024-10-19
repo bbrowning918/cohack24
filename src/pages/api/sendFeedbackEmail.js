@@ -9,7 +9,7 @@ export default async (req, res) => {
   const { data, error } = await resend.emails.send({
     from: 'Jewel <no-reply@usejewel.app>',
     to: [email],
-    subject: 'Jewel Weekly Feedback Update',
+    subject: 'Jewel Journaling Weekly Update',
     react: Feedback({ firstName }),
   });
 

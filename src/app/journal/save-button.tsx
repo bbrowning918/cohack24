@@ -46,7 +46,7 @@ export function SaveButton({
         setLoading(true);
         await fetch("/api/sendFeedbackEmail", {
           method: "POST",
-          body: JSON.stringify({ firstName: "John Doe", email: "ajiboyeayotomy@gmail.com" }),
+          body: JSON.stringify({ firstName: "Tommy", email: "ajiboyeayotomy@gmail.com" }),
           headers: {
             "Content-Type": "application/json",
           },
