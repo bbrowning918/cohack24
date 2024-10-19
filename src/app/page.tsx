@@ -3,6 +3,22 @@ import Link from 'next/link';
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 
+const HomeCard = ({stepNum, stepText, description, imgSrc}) => {
+  return (
+    <Card className="w-96 p-10">
+      <span className="font-semibold rounded p-1 mr-2 bg-jewelPrimary">{stepNum}</span><span className="font-semibold rounded p-1 bg-jewelPrimary">{stepText}</span>
+      <div>{description}</div>
+      <Image
+        src={imgSrc}
+        alt="alt :)"
+        width={128}
+        height={128}
+        priority
+      />
+    </Card>
+  );
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen w-screen font-[family-name:var(--font-lato)]">
@@ -24,36 +40,52 @@ export default function Home() {
         </div>
 
         <div className="max-w-3xl mx-auto flex flex-col pb-20">
-          <div className="text-6xl text-jewelBlack font-bold text-center mb-6">Unlock the Endless Possibilities of Journaling</div>
+          <div className="text-6xl text-jewelBlack font-extrabold text-center mb-6">Unlock the Endless Possibilities of Journaling</div>
           <div className="text-center mb-6">Our journaling tool helps you reflect, grow, and achieve your goals with personalized prompts and AI-driven feedback. Gain valuable insights into your journey of self-improvement.</div>
           <Link href="/signup" className="mx-auto"><Button className="p-6 text-jewelBlack">Start Journaling Now</Button></Link>
         </div>
 
-        <div className="w-screen h-24 bg-jewelBlack rounded-halfEllipse border-jewelPrimary"></div>
+        <Image
+          src={'/home/Elipse.svg'}
+          alt="alt :)"
+          width={1920}
+          height={1080}
+          priority
+        />
 
         <div className="bg-jewelBlack text-jewelWhite pb-20">
-          <div className="text-2xl text-center font-semibold pb-8">How it Works</div>
-          <div className="max-w-2xl mx-auto flex flex-wrap justify-center gap-8 pb-20">
-            <Card className="w-64 p-10">
-              <span className="rounded p-1 mr-2 bg-jewelPrimary">1</span><span className="rounded p-1 bg-jewelPrimary">Sign Up</span>
-              <div>Create your account in minutes and embark on your journaling journey.</div>
-            </Card>
-            <Card className="w-64 p-10">
-              <span className="rounded p-1 mr-2 bg-jewelPrimary">2</span><span className="rounded p-1 bg-jewelPrimary">Set your Goals</span>
-              <div>Choose personalized goals to tailor your journaling experience.</div>
-            </Card>
-            <Card className="w-64 p-10">
-              <span className="rounded p-1 mr-2 bg-jewelPrimary">3</span><span className="rounded p-1 bg-jewelPrimary">Reflect & Write</span>
-              <div>Use our prompts to log your daily achievements and challenges.</div>
-            </Card>
-            <Card className="w-64 p-10">
-              <span className="rounded p-1 mr-2 bg-jewelPrimary">4</span><span className="rounded p-1 bg-jewelPrimary">Receive Insights</span>
-              <div>Get AI-generated feedback and summaries to help you track your growth.</div>
-            </Card>
-            <Card className="w-64 p-10">
-              <span className="rounded p-1 mr-2 bg-jewelPrimary">5</span><span className="rounded p-1 bg-jewelPrimary">Improve & Achieve</span>
-              <div>Regularly revisit your insights and continue your journey of self-improvement.</div>
-            </Card>
+          <div className="text-2xl text-center font-bold pb-8">How it Works</div>
+          <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-8 pb-20">
+            <HomeCard
+              stepNum={1}
+              stepText={'Sign Up'}
+              description={'Create your account in minutes and embark on your journaling journey.'}
+              imgSrc={'/home/Sign Up.svg'}
+            />
+            <HomeCard
+              stepNum={2}
+              stepText={'Set your Goals'}
+              description={'Choose personalized goals to tailor your journaling experience.'}
+              imgSrc={'/home/Set Your Goals.svg'}
+            />
+            <HomeCard
+              stepNum={3}
+              stepText={'Reflect & Write'}
+              description={'Use our prompts to log your daily achievements and challenges.'}
+              imgSrc={'/home/Reflect and Write.svg'}
+            />
+            <HomeCard
+              stepNum={4}
+              stepText={'Receive Insights'}
+              description={'Get AI-generated feedback and summaries to help you track your growth.'}
+              imgSrc={'/home/Receive Insights.svg'}
+            />
+            <HomeCard
+              stepNum={5}
+              stepText={'Improve & Achieve'}
+              description={'Regularly revisit your insights and continue your journey of self-improvement.'}
+              imgSrc={'/home/Improve and Achieve.svg'}
+            />
           </div>
 
         <div className="w-1/3 mx-auto text-center">
