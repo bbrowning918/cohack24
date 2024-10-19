@@ -82,8 +82,8 @@ export default function FullPageForm() {
                     <h1 className="text-2xl md:text-3xl font-bold mb-8 text-black">
                         {step === 1 && "Personal Information"}
                         {step === 2 && "Enter Confirmation Code"}
-                        {step === 3 && "Select a Goal"}
-                        {step === 4 && "Email Frequency"}
+                        {step === 3 && "Select a Goal You’ll like to Achieve"}
+                        {step === 4 && "How Often Would You Like to Receive a Summary of Your Journals?"}
                     </h1>
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {step === 1 && (

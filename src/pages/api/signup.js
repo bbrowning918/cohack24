@@ -7,7 +7,10 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { firstname, email, occupation, goal, emailFrequency: msg_frequency } = req.body;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4696b774b99ede0e4994baf087a8e3a63dca8041
     // Step 1: Insert a new goal if needed
     
     let goal_id = {"productivity": 1, "workProgress": 2, "midndfulness": 3}[goal];
