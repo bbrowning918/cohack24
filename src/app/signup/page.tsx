@@ -194,7 +194,7 @@ export default function FullPageForm() {
                             ) : (
                                 <Button type="submit" className="bg-lime-500 text-white hover:bg-lime-600" onClick={async () => {
                                     console.log(formData);
-                                    await router.push('/editor')
+                                    await router.push('/journal')
                                 }}>
                                     Submit
                                 </Button>
