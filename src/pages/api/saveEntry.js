@@ -7,6 +7,8 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { email, content } = req.body;
 
+    console.log(email);
+
     // Fetch the user's ID based on the email
     const { data: user, error: userError } = await supabase
       .from('profiles')

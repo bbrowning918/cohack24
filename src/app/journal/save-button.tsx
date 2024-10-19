@@ -22,24 +22,25 @@ export function SaveButton({
     const [isDialogOpen, setDialogOpen] = useState(false)
     const router = useRouter()
     const submitEntry = async () => {
-      // const body = JSON.stringify({
-      //   content: content ?? defaultJewelEditorContent,
-      // })
-      // const res = await fetch('/api/saveEntry', {
-      //   method: 'POST',
-      //   body,
-      // })
-      // await jewelLocalDb().setItem(date, content)
-      // await completedEntriesDb().setItem(date, true)
-      // if (res.ok) {
-      //   return router.refresh()
-      // }
+      const body = JSON.stringify({
+        content: content ?? defaultJewelEditorContent,
+      })
+      const res = await fetch('/api/saveEntry', {
+        method: 'POST',
+        body,
+      })
+      await jewelLocalDb().setItem(date, content)
+      await completedEntriesDb().setItem(date, true)
+      if (res.ok) {
+        router.refresh();
+        sendFeedback().then(() => {
+          setLoading(false);
+          router.push('/journal');
+        });
+      }
+      }
 
-      sendFeedback().then(() => {
-        setLoading(false);
-        router.push('/journal');
-      });
-    }
+
 
   async function sendFeedback() {
       try {
