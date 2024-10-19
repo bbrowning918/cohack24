@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 
-const HomeCard = ({stepNum, stepText, description, imgSrc}) => {
+const HomeCard = ({stepNum, stepText, description, imgSrc}: {stepNum: number, stepText: string, description: string, imgSrc: string}) => {
   return (
     <Card className="w-96 p-10">
       <span className="font-semibold rounded p-1 mr-2 bg-jewelPrimary">{stepNum}</span><span className="font-semibold rounded p-1 bg-jewelPrimary">{stepText}</span>
