@@ -47,27 +47,27 @@ export const Feedback = ({
                     <li>Selected Goal: {selectedGoal}</li>
                     <li>Importance: {goalImportance}</li>
                 </ul>
-                <div>Key Insights</div>
+                <div className="text-2xl text-jewelSecondary pb-4">Key Insights</div>
 
-                <div>Tasks Completed</div>
+                <div className="text-jewelSecondary pb-2">Tasks Completed</div>
                 <div>{tasksCompleted}</div>
 
-                <div>Challenges Faced</div>
+                <div className="text-jewelSecondary pb-2">Challenges Faced</div>
                 <div>{challengesFaced}</div>
 
-                <div>Time Management Patterns</div>
+                <div className="text-jewelSecondary pb-2">Time Management Patterns</div>
                 <div>{timeManagement}</div>
 
-                <div>Collaboration & Support</div>
+                <div className="text-jewelSecondary pb-2">Collaboration & Support</div>
                 <div>{collaboration}</div>
 
-                <div>Suggestions for Improvement</div>
+                <div className="text-jewelSecondary pb-2">Suggestions for Improvement</div>
                 <div>{suggestions}</div>
 
-                <div>Emotional Wellbeing</div>
+                <div className="text-jewelSecondary pb-2">Emotional Wellbeing</div>
                 <div>{emotionalWellbeing}</div>
 
-                <div>Conclusion</div>
+                <div className="text-jewelSecondary pb-2">Conclusion</div>
                 <div>{conclusion}</div>
 
                 <div>What do you feel about this feedback?</div>
