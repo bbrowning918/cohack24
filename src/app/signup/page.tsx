@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/input-otp"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
 
 const StepImage = ({ step }) => {
     const svgContent = {
@@ -44,6 +45,7 @@ const StepImage = ({ step }) => {
 };
 
 export default function FullPageForm() {
+    const router = useRouter();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         firstName: '',
@@ -190,8 +192,9 @@ export default function FullPageForm() {
                                     Continue
                                 </Button>
                             ) : (
-                                <Button type="submit" className="bg-lime-500 text-white hover:bg-lime-600" onClick={() => {
+                                <Button type="submit" className="bg-lime-500 text-white hover:bg-lime-600" onClick={async () => {
                                     console.log(formData);
+                                    await router.push('/editor')
                                 }}>
                                     Submit
                                 </Button>
