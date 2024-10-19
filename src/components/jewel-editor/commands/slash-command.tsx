@@ -56,52 +56,6 @@ export const suggestionItems = createSuggestionItems([
         .run();
     },
   },
-  {
-    title: "Text",
-    description: "Just start typing with plain text.",
-    searchTerms: ["p", "paragraph"],
-    icon: <Text size={18} />,
-    command: ({ editor, range }) => {
-      editor
-        .chain()
-        .focus()
-        .deleteRange(range)
-        .toggleNode("paragraph", "paragraph")
-        .run();
-    },
-  },
-  {
-    title: "Bullet List",
-    description: "Create a simple bullet list.",
-    searchTerms: ["unordered", "point"],
-    icon: <List size={18} />,
-    command: ({ editor, range }) => {
-      editor.chain().focus().deleteRange(range).toggleBulletList().run();
-    },
-  },
-  {
-    title: "Numbered List",
-    description: "Create a list with numbering.",
-    searchTerms: ["ordered"],
-    icon: <ListOrdered size={18} />,
-    command: ({ editor, range }) => {
-      editor.chain().focus().deleteRange(range).toggleOrderedList().run();
-    },
-  },
-  {
-    title: "Quote",
-    description: "Capture a quote.",
-    searchTerms: ["blockquote"],
-    icon: <TextQuote size={18} />,
-    command: ({ editor, range }) =>
-      editor
-        .chain()
-        .focus()
-        .deleteRange(range)
-        .toggleNode("paragraph", "paragraph")
-        .toggleBlockquote()
-        .run(),
-  },
 ]);
 
 export const slashCommand = Command.configure({
