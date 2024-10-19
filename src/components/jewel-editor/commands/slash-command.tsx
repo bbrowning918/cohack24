@@ -1,26 +1,59 @@
-import {
-  CheckSquare,
-  Code,
-  Heading1,
-  Heading2,
-  Heading3,
-  List,
-  ListOrdered,
-  MessageSquarePlus,
-  Text,
-  TextQuote,
-} from "lucide-react";
+import { List, ListOrdered, Text, TextQuote, Blocks } from "lucide-react";
 import { createSuggestionItems } from "novel/extensions";
 import { Command, renderItems } from "novel/extensions";
 
 export const suggestionItems = createSuggestionItems([
   {
-    title: "Send Feedback",
-    description: "Let us know how we can improve.",
-    icon: <MessageSquarePlus size={18} />,
+    title:
+      "What tasks did you complete today, and what could you improve for tomorrow?",
+    description: "Question Preset",
+    searchTerms: ["what", "ai"],
+    icon: <Blocks size={18} />,
     command: ({ editor, range }) => {
-      editor.chain().focus().deleteRange(range).run();
-      window.open("/feedback", "_blank");
+      editor
+        .chain()
+        .focus()
+        .deleteRange(range)
+        .setNode("heading", { level: 4 })
+        .insertContent(
+          "What tasks did you complete today, and what could you improve for tomorrow?\n"
+        )
+        .run();
+    },
+  },
+  {
+    title: "Did you encounter any distractions, and how did you manage them?",
+    description: "Question Preset",
+    searchTerms: ["did", "ai"],
+    icon: <Blocks size={18} />,
+    command: ({ editor, range }) => {
+      editor
+        .chain()
+        .focus()
+        .deleteRange(range)
+        .setNode("heading", { level: 4 })
+        .insertContent(
+          "Did you encounter any distractions, and how did you manage them?\n"
+        )
+        .run();
+    },
+  },
+  {
+    title:
+      "What are three things that went well today, and how can you replicate that success?",
+    description: "Question Preset",
+    searchTerms: ["what", "ai"],
+    icon: <Blocks size={18} />,
+    command: ({ editor, range }) => {
+      editor
+        .chain()
+        .focus()
+        .deleteRange(range)
+        .setNode("heading", { level: 4 })
+        .insertContent(
+          "What are three things that went well today, and how can you replicate that success?\n"
+        )
+        .run();
     },
   },
   {
@@ -34,57 +67,6 @@ export const suggestionItems = createSuggestionItems([
         .focus()
         .deleteRange(range)
         .toggleNode("paragraph", "paragraph")
-        .run();
-    },
-  },
-  {
-    title: "To-do List",
-    description: "Track tasks with a to-do list.",
-    searchTerms: ["todo", "task", "list", "check", "checkbox"],
-    icon: <CheckSquare size={18} />,
-    command: ({ editor, range }) => {
-      editor.chain().focus().deleteRange(range).toggleTaskList().run();
-    },
-  },
-  {
-    title: "Heading 1",
-    description: "Big section heading.",
-    searchTerms: ["title", "big", "large"],
-    icon: <Heading1 size={18} />,
-    command: ({ editor, range }) => {
-      editor
-        .chain()
-        .focus()
-        .deleteRange(range)
-        .setNode("heading", { level: 1 })
-        .run();
-    },
-  },
-  {
-    title: "Heading 2",
-    description: "Medium section heading.",
-    searchTerms: ["subtitle", "medium"],
-    icon: <Heading2 size={18} />,
-    command: ({ editor, range }) => {
-      editor
-        .chain()
-        .focus()
-        .deleteRange(range)
-        .setNode("heading", { level: 2 })
-        .run();
-    },
-  },
-  {
-    title: "Heading 3",
-    description: "Small section heading.",
-    searchTerms: ["subtitle", "small"],
-    icon: <Heading3 size={18} />,
-    command: ({ editor, range }) => {
-      editor
-        .chain()
-        .focus()
-        .deleteRange(range)
-        .setNode("heading", { level: 3 })
         .run();
     },
   },
@@ -119,14 +101,6 @@ export const suggestionItems = createSuggestionItems([
         .toggleNode("paragraph", "paragraph")
         .toggleBlockquote()
         .run(),
-  },
-  {
-    title: "Code",
-    description: "Capture a code snippet.",
-    searchTerms: ["codeblock"],
-    icon: <Code size={18} />,
-    command: ({ editor, range }) =>
-      editor.chain().focus().deleteRange(range).toggleCodeBlock().run(),
   },
 ]);
 
