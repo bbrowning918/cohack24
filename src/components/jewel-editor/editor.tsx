@@ -1,10 +1,23 @@
-import { useDebouncedCallback } from "@/lib/use-debounced-callback";
-import type { JSONContent } from "@tiptap/core";
-import { EditorContent, EditorInstance, EditorRoot } from "novel";
-import { useState } from "react";
+"use client";
 
-export function JewelEditor() {
-  const [content, setContent] = useState<JSONContent | undefined>(undefined);
+import { useDebouncedCallback } from "@/lib/use-debounced-callback";
+import type { JSONContent, AnyExtension } from "@tiptap/core";
+import { EditorContent, EditorRoot } from "novel";
+import type { EditorInstance } from "novel";
+import { useState } from "react";
+import { defaultJewelEditorContent } from "./default-content";
+import { defaultJewelEditorExtensions } from "./default-extensions";
+
+interface JewelEditorProps {
+  initialContent?: JSONContent;
+  extensions?: AnyExtension[];
+}
+
+export function JewelEditor({
+  extensions = [],
+  initialContent = defaultJewelEditorContent,
+}: JewelEditorProps) {
+  const [content, setContent] = useState(initialContent);
   const debouncedUpdates = useDebouncedCallback(
     async (editor: EditorInstance) => {
       const json = editor.getJSON();
@@ -15,6 +28,8 @@ export function JewelEditor() {
   return (
     <EditorRoot>
       <EditorContent
+        extensions={extensions.concat(defaultJewelEditorExtensions)}
+        immediatelyRender={false}
         initialContent={content}
         onUpdate={({ editor }) => debouncedUpdates(editor)}
       />
