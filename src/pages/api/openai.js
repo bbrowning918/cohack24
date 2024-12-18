@@ -122,7 +122,7 @@ export default async function handler(req, res) {
     "firstName": "${profile.firstname}",
     "startDate": "${startDate}",
     "endDate": "${endDate}",
-    "selectedGoal": "Improve My Daily Productivity",
+    "selectedGoal": ${goal.heading},
     "goalImportance": "This goal helps you enhance your efficiency and achieve your daily tasks more effectively.",
     "tasksCompleted": "[Highlight significant tasks or milestones achieved by the user, emphasizing their impact or challenge level.]",
     "challengesFaced": "[Provide an overview of notable challenges, both practical and emotional, that affected the user’s progress.]",
