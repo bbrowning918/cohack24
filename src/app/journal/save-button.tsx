@@ -24,7 +24,8 @@ export function SaveButton({
 }: SaveButtonProps) {
   const [loading, setLoading] = useState(false);
 
-    const [isDialogOpen, setDialogOpen] = useState(false)
+  const [dialogState, setDialogState] = useState("closed") 
+
     const router = useRouter()
     const submitEntry = async () => {
       const body = JSON.stringify({
