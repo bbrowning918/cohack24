@@ -29,22 +29,35 @@ export function SaveButton({
     const router = useRouter()
     const submitEntry = async () => {
       const body = JSON.stringify({
+        email: "alkarar975@gmail.com",
         content: content ?? defaultJewelEditorContent,
       })
       const res = await fetch('/api/saveEntry', {
         method: 'POST',
         body,
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error('API Error:', {error: errorData.error, status: res.status});
+        throw new Error(
+          `Failed to save journal entry (${res.status}): ${
+            errorData.error || 'Unknown error occurred'
+          }`
+        );
+      }
+  
       await jewelLocalDb().setItem(date, content)
       await completedEntriesDb().setItem(date, true)
-      if (res.ok) {
-        router.refresh();
-        sendFeedback().then(() => {
-          setLoading(false);
-          router.push('/journal');
-        });
-      }
-      }
+      router.refresh();
+      sendFeedback().then(() => {
+        setLoading(false);
+        router.push('/journal');
+      });
+    }
 
 
   async function sendFeedback() {
@@ -52,7 +65,7 @@ export function SaveButton({
         setLoading(true);
         await fetch("/api/sendFeedbackEmail", {
           method: "POST",
-          body: JSON.stringify({ firstName: "Tommy", email: "ajiboyeayotomy@gmail.com" }),
+          body: JSON.stringify({ firstName: "Tommy", email: "alkarar975@gmail.com" }),
           headers: {
             "Content-Type": "application/json",
           },
