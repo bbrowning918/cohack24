@@ -15,7 +15,7 @@ interface SaveButtonProps {
     date: string;
     content: JSONContent | undefined
     isCompleted?: boolean
-}
+} 
 
 export function SaveButton({
     date,
@@ -79,7 +79,7 @@ export function SaveButton({
           {dialogState === 'open' ? (
             <>
               <QuestionMark />
-              <DialogTitle>Are you sure you're done writing?</DialogTitle>
+              <DialogTitle>Are you sure you&#39;re done writing?</DialogTitle>
               <p>If you click submit, you can’t make any changes to your journal entry</p>
               <Button size="lg" type="button" onClick={submitEntry} onSubmit={() => {
                 sendFeedback();
