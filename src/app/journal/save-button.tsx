@@ -29,7 +29,7 @@ export function SaveButton({
     const router = useRouter()
     const submitEntry = async () => {
       const body = JSON.stringify({
-        email: "alkarar975@gmail.com",
+        email: "delivered@resend.dev",
         content: content ?? defaultJewelEditorContent,
       })
       const res = await fetch('/api/saveEntry', {
@@ -65,11 +65,12 @@ export function SaveButton({
         setLoading(true);
         await fetch("/api/sendFeedbackEmail", {
           method: "POST",
-          body: JSON.stringify({ firstName: "Tommy", email: "alkarar975@gmail.com" }),
+          body: JSON.stringify({ firstName: "Test", email: "delivered@resend.dev" }),
           headers: {
             "Content-Type": "application/json",
           },
         })
+        
       } catch (error) {
         console.error(error)
         throw error;
