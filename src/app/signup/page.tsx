@@ -159,15 +159,15 @@ export default function FullPageForm() {
                             <RadioGroup defaultValue="comfortable" onValueChange={(value) => setFormData(prev => ({ ...prev, goal: value }))}>
                                 <div className="space-y-2">
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="productivity" id="r1" className="border-jewelBlack"/>
+                                        <RadioGroupItem value="1" id="r1" className="border-jewelBlack"/>
                                         <Label htmlFor="r1">Improve my daily productivity</Label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="workProgress" id="r2" className="border-jewelBlack"/>
+                                        <RadioGroupItem value="2" id="r2" className="border-jewelBlack"/>
                                         <Label htmlFor="r2">Monitor my work progress & identify areas of improvement</Label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="mindfulness" id="r3" className="border-jewelBlack"/>
+                                        <RadioGroupItem value="3" id="r3" className="border-jewelBlack"/>
                                         <Label htmlFor="r3">Cultivate mindfulness and improve interpersonal interactions</Label>
                                     </div>
                                 </div>
@@ -178,15 +178,15 @@ export default function FullPageForm() {
                             <RadioGroup defaultValue="comfortable" onValueChange={(value) => setFormData(prev => ({ ...prev, emailFrequency: value }))}>
                                 <div className="space-y-2">
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="weekly" id="r1" className="border-jewelBlack"/>
+                                        <RadioGroupItem value="1" id="r1" className="border-jewelBlack"/>
                                         <Label htmlFor="r1">Weekly</Label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="biweekly" id="r2" className="border-jewelBlack"/>
+                                        <RadioGroupItem value="2" id="r2" className="border-jewelBlack"/>
                                         <Label htmlFor="r2">Bi-weekly</Label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="monthly" id="r3" className="border-jewelBlack"/>
+                                        <RadioGroupItem value="3" id="r3" className="border-jewelBlack"/>
                                         <Label htmlFor="r3">Monthly</Label>
                                     </div>
                                 </div>
@@ -215,7 +215,7 @@ export default function FullPageForm() {
                                     }).then((data) => {
                                         setLoading(false);
                                     })
-
+                                    console.log(formData.emailFrequency);
                                 
                                     await router.push('/journal')
 
