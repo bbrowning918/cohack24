@@ -9,7 +9,7 @@ interface Profile {
 	occupation: string;
 	created_at: string;
 	goals: number; // Foreign key to goals table
-	msg_frequencies: number; // Foreign key to msg_frequencies table
+	email_frequencies: number; // Foreign key to email_frequencies table
 }
 
 interface Goal {
@@ -19,7 +19,7 @@ interface Goal {
 	created_at: string;
 }
 
-interface MsgFrequency {
+interface EmailFrequency {
 	id: number;
 	time_interval: string;
 	created_at: string;
@@ -59,7 +59,7 @@ async function getProfileById(id: number): Promise<Profile | null> {
 	return data;
 }
 
-async function addProfile(firstname: string, email: string, occupation: string, goalId: number, msgFrequencyId: number): Promise<Profile | null> {
+async function addProfile(firstname: string, email: string, occupation: string, goalId: number, emailFrequnecyId: number): Promise<Profile | null> {
 	const { data, error } = await supabaseClient
 		.from('profiles')
 		.insert([
@@ -68,7 +68,7 @@ async function addProfile(firstname: string, email: string, occupation: string, 
 				email,
 				occupation,
 				goal_id: goalId,
-				msg_frequency_id: msgFrequencyId,
+				email_frequency_id: emailFrequnecyId,
 			},
 		])
 		.single();
@@ -134,9 +134,9 @@ async function getGoalByHeading(heading: string): Promise<Goal | null> {
 }
 
 // Message Frequencies (Static Data)
-async function getAllMsgFrequencies(): Promise<MsgFrequency[]> {
+async function getAllEmailFrequencies(): Promise<EmailFrequency[]> {
 	const { data, error } = await supabaseClient
-		.from('msg_frequencies')
+		.from('email_frequencies')
 		.select('*');
 
 	if (error) {
@@ -146,9 +146,9 @@ async function getAllMsgFrequencies(): Promise<MsgFrequency[]> {
 	return data!;
 }
 
-async function getMsgFrequencyById(id: number): Promise<MsgFrequency | null> {
+async function getEmailFrequencyById(id: number): Promise<EmailFrequency | null> {
 	const { data, error } = await supabaseClient
-		.from('msg_frequencies')
+		.from('email_frequencies')
 		.select('*')
 		.eq('id', id)
 		.single();
@@ -213,8 +213,8 @@ const db = {
 	getAllGoals,
 	getGoalById,
 	getGoalByHeading,
-	getAllMsgFrequencies,
-	getMsgFrequencyById,
+	getAllEmailFrequencies,
+	getEmailFrequencyById,
 	getJournalEntriesByUserId,
 	addJournalEntry,
 	deleteJournalEntryById,

@@ -16,7 +16,7 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
 const fetchUserProfile = async (email) => {
   const { data: profile, error } = await supabase
     .from('profiles')
-    .select('id, firstname, goal_id, msg_frequency_id')
+    .select('id, firstname, goal_id, email_frequency_id')
     .eq('email', email)
     .single();
 
@@ -37,16 +37,16 @@ const fetchGoal = async (goal_id) => {
 };
 
 /**
- * Fetch message frequency by msg_frequency_id.
+ * Fetch message frequency by email_frequency_id.
  */
-const fetchMsgFrequency = async (msg_frequency_id) => {
-  const { data: msgFrequency, error } = await supabase
-    .from('msg_frequencies')
+const fetchEmailFrequency = async (email_frequency_id) => {
+  const { data: emailFrequency, error } = await supabase
+    .from('email_frequencies')
     .select('time_interval')
-    .eq('id', msg_frequency_id)
+    .eq('id', email_frequency_id)
     .single();
 
-  return { msgFrequency, error };
+  return { emailFrequency, error };
 };
 
 /**
@@ -90,8 +90,8 @@ export default async function handler(req, res) {
   }
 
   // Fetch message frequency
-  const { msgFrequency, error: msgFrequencyError } = await fetchMsgFrequency(profile.msg_frequency_id);
-  if (msgFrequencyError || !msgFrequency) {
+  const { emailFrequency, error: emailFrequencyError } = await fetchEmailFrequency(profile.email_frequency_id);
+  if (emailFrequencyError || !emailFrequency) {
     return res.status(404).json({ error: 'Message frequency not found' });
   }
 
@@ -111,11 +111,11 @@ export default async function handler(req, res) {
     userMessage += `${index + 1}. Entry: ${entry.content}\n\n`;
   });
 
-  const { startDate, endDate } = calculateDateRange(msgFrequency.time_interval)
+  const { startDate, endDate } = calculateDateRange(emailFrequency.time_interval)
   // Define the system message
   const systemMessage = `
   You are an AI assistant tasked with summarizing a user's journal entries for their progress report. 
-  The user has chosen a ${msgFrequency.time_interval} summary format, focusing on the goal: '${goal.heading}'.
+  The user has chosen a ${emailFrequency.time_interval} summary format, focusing on the goal: '${goal.heading}'.
   Generate a structured summary in JSON format with the following properties:
 
   {
