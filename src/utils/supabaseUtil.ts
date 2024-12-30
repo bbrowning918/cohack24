@@ -59,7 +59,7 @@ async function getProfileById(id: number): Promise<Profile | null> {
 	return data;
 }
 
-async function addProfile(firstname: string, email: string, occupation: string, goalId: number, emailFrequnecyId: number): Promise<Profile | null> {
+async function addProfile(firstname: string, email: string, occupation: string, goalId: number, emailFrequnecyId: number, authUserId: string): Promise<Profile | null> {
 	const { data, error } = await supabaseClient
 		.from('profiles')
 		.insert([
@@ -205,6 +205,28 @@ async function deleteJournalEntryById(id: number): Promise<boolean> {
 	return true;
 }
 
+async function createVerificationCode(authUserId: string): Promise<string> {
+	// Generate a 6-digit random verification code
+	const code = Math.floor(100000 + Math.random() * 900000).toString();
+
+	// Insert the code into the verification_codes table
+	const { data, error } = await supabaseClient.from('verification_codes').insert([
+		{
+			user_id: authUserId,
+			code,
+			expires_at: new Date(Date.now() + 15 * 60 * 1000), // Code expires in 15 minutes
+		},
+	]);
+
+	if (error) {
+		throw new Error(`Error creating verification code: ${error.message}`);
+	}
+
+	// Return the generated code
+	return code;
+}
+
+
 const db = {
 	getAllProfiles,
 	getProfileById,
@@ -218,6 +240,7 @@ const db = {
 	getJournalEntriesByUserId,
 	addJournalEntry,
 	deleteJournalEntryById,
+	createVerificationCode,
 };
 
 export default db;

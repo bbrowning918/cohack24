@@ -54,7 +54,8 @@ export default function FullPageForm() {
         occupation: '',
         goal: '',
         confirmationCode: '',
-        emailFrequency: ''
+        emailFrequency: '',
+        password: ''
     });
 
     const [loading, setLoading] = useState(false);
@@ -69,6 +70,8 @@ export default function FullPageForm() {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
+        
+
         console.log('Form submitted:', formData);
     };
 
@@ -117,6 +120,19 @@ export default function FullPageForm() {
                                         name="email"
                                         type="email"
                                         value={formData.email}
+                                        onChange={handleInputChange}
+                                        required
+                                        className="mt-1 bg-gray-100 text-black border border-gray-300"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="password" className="text-black">Password</Label>
+                                    <Input
+                                        id="password"
+                                        name="password"
+                                        type="password"
+                                        value={formData.password}
                                         onChange={handleInputChange}
                                         required
                                         className="mt-1 bg-gray-100 text-black border border-gray-300"
