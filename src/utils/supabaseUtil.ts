@@ -2,7 +2,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseClient: SupabaseClient = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
-import { Profile, JournalEntry, Goal, EmailFrequency} from '@/types/interfaces';
+import { Profile, JournalEntry, Goal, EmailFrequency, AuthData } from '@/types/interfaces';
 // Profiles
 async function getAllProfiles(): Promise<Profile[]> {
 	const { data, error } = await supabaseClient
@@ -197,6 +197,29 @@ async function createVerificationCode(authUserId: string): Promise<string> {
 	return code;
 }
 
+async function createUser(email: string, password: string): Promise<AuthData> {
+	const { data, error } = await supabaseClient.auth.signUp({
+        email,
+        password,
+    });
+	
+	if (!data.user) {
+		throw new Error('Failed to create user: No user returned from Supabase');
+	}
+
+	if (!data.session) {
+		throw new Error('Failed to create user: No session returned from Supabase');
+	}
+
+    if (error) {
+        throw new Error(`Error creating user: ${error.message}`);
+    }
+
+    return {
+		user: data.user,
+		session: data.session,
+	};
+}
 
 
 
@@ -214,6 +237,7 @@ const db = {
 	addJournalEntry,
 	deleteJournalEntryById,
 	createVerificationCode,
+	createUser,
 };
 
 export default db;

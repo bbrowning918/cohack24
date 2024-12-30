@@ -2,9 +2,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import db from "@/utils/supabaseUtil";
 
-import { AuthResponse, createClient } from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js";
 
 import { Resend } from "resend";
+import { AuthData } from "@/types/interfaces";
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
@@ -15,24 +16,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             const { email, password } = req.body;
             
-            const authUser: AuthResponse = await supabase.auth.signUp({
-                email: email,
-                password: password
-            });
-            
-            if (authUser.error) {
-                res.status(400).json({ success: false, error: authUser.error.message });
-                return;
-            }
-
-            if (!(authUser.data && authUser.data.user)) {
-                res.status(400).json({ success: false, error: "User data is missing" });
-                return;
-            }
-
-            const authUserId = authUser.data.user.id;
-            
-            const verificationCode: string = await db.createVerificationCode(authUserId);
+            const authUser: AuthData = await db.createUser(email, password);
+            const verificationCode: string = await db.createVerificationCode(authUser.user.id);
 
             await resend.emails.send({
                 from: "onboarding@resend.dev",
@@ -44,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(200).json({
 				success: true,
 				message: 'Signup successful. Verification code sent.',
-				authUserId: authUserId, 
+				authUserId: authUser.user.id, 
 			});        
         }
         catch (error) {

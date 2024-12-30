@@ -30,5 +30,9 @@ interface JournalEntry {
     created_at: string;
 }
 
+interface AuthData {
+    user: User;
+    session: Session;
+}
 
-export type { Profile, Goal, EmailFrequency, JournalEntry };
+export type { Profile, Goal, EmailFrequency, JournalEntry, AuthData };
