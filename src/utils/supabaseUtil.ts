@@ -221,6 +221,41 @@ async function createUser(email: string, password: string): Promise<AuthData> {
 	};
 }
 
+async function getAuthIdByEmail(email: string): Promise<string| null> {
+	const {data, error} = await supabaseClient
+		.from('auth.users')
+		.select('id')
+		.eq('email', email)
+		.single();
+	
+	if (error) {
+		throw new Error(`Error fetching auth ID by email (${email}): ${error.message}`);
+	}
+	
+
+	
+
+	return data?.id || null;
+
+}
+
+async function getVerificationByAuthId(authId: string | null): Promise<string| null> {
+	const {data, error} = await supabaseClient
+        .from('verification_codes')
+        .select('code')
+        .eq('user_id', authId)
+        .single();
+
+	if (!authId) {
+		throw new Error("Can't pass in null value for authId")
+	}
+    
+    if (error) {
+        throw new Error(`Error fetching verification code by auth ID (${authId}): ${error.message}`);
+    }
+
+    return data?.code || null;
+}
 
 
 const db = {
@@ -238,6 +273,8 @@ const db = {
 	deleteJournalEntryById,
 	createVerificationCode,
 	createUser,
+	getAuthIdByEmail,
+	getVerificationByAuthId,
 };
 
 export default db;

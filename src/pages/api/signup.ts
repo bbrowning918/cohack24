@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 to: email,
                 subject: "Resend Verification Code",
                 text: verificationCode
-            })            
+            });            
 
             res.status(200).json({
 				success: true,
